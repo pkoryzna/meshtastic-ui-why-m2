@@ -1,0 +1,12 @@
+[submodule "3rdparty/SdFat"]
+	path = 3rdparty/SdFat
+	url = https://github.com/mverch67/SdFat.git
+[submodule "3rdparty/ArduinoThread"]
+	path = 3rdparty/ArduinoThread
+	url = https://github.com/meshtastic/ArduinoThread.git
+[submodule "3rdparty/nanopb"]
+	path = 3rdparty/nanopb
+	url = https://github.com/nanopb/nanopb.git
+[submodule "3rdparty/meshtastic-device-ui"]
+	path = 3rdparty/meshtastic-device-ui
+	url = https://github.com/pkoryzna/meshtastic-device-ui.git
