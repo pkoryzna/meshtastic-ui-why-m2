@@ -1,0 +1,1 @@
+../../3rdparty/SdFat/src/FreeStack.h
