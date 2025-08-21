@@ -78,3 +78,6 @@ dkms.conf
 # ESP-IDF stuff
 build/
 managed_components/
+
+# annoying
+.vscode/settings.json
