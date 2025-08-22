@@ -16,7 +16,7 @@ message(STATUS "Using Generated View: " ${GENERATED_VIEW})
 # include(nanopb)
 # include(Doctest)
 
-file(GLOB_RECURSE sources      source/* generated/* portduino/* locale/* generated/${GENERATED_VIEW}/*)
+file(GLOB_RECURSE sources      source/* generated/* locale/* generated/${GENERATED_VIEW}/* source/util/*)
 file(GLOB_RECURSE sources_test tests/*.cpp)
 
 idf_component_register(
@@ -26,17 +26,27 @@ idf_component_register(
         include/
         src/
         locale/
-        portduino/
+        # portduino/
         generated/${GENERATED_VIEW}/
         ${GENERATED_FILES_DIR}/
         ${CMAKE_CURRENT_BINARY_DIR}/
+        drivers/
+    REQUIRES
+        MeshtasticProtobuf
     PRIV_REQUIRES
         lvgl
         nanopb
+        esp_driver_uart
+        arduino-esp32
+        SdFat
+        esp_lcd_st7703
 )
 
 target_compile_options(${COMPONENT_LIB} PRIVATE
-      "-Wno-error"
+      "-w"
+      "-Wno-error=format"
+      "-Wno-error=overloaded-virtual"
+      "-Wno-error=trigraphs"
       "-std=c++14"
       "-Os"
       "-DCORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_VERBOSE"
@@ -57,7 +67,7 @@ target_compile_options(${COMPONENT_LIB} PRIVATE
       "-Ivariants/why2025-m2"
       "-DSERIAL_RX=16"
       "-DSERIAL_TX=15"
-      "-DUSE_SERIAL1"
+      "-DUSE_SERIAL2"
       "-DUSE_ILOG"
       "-DUSE_ESP_LCD_WHY2025"
       "-I3rdparty/esp_lcd_st7703/include"
@@ -68,6 +78,5 @@ target_compile_options(${COMPONENT_LIB} PRIVATE
       "-DARDUINO_USB_MODE=1"
       "-DARDUINO_RUNNING_CORE=1"
       "-DARDUINO_EVENT_RUNNING_CORE=1"
-      "-Wno-error=trigraphs"
       "-DLV_LVGL_H_INCLUDE_SIMPLE"
 )

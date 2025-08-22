@@ -1,21 +1,26 @@
-# The following lines of boilerplate have to be in your project's
-# CMakeLists in this exact order for cmake to work correctly
-cmake_minimum_required(VERSION 3.16)
+file(GLOB pb_files lib/mesh/generated/meshtastic/*.pb.cpp)
+idf_component_register(
+    SRCS 
+        lib/log/Log.cpp
+        util/ILog.cpp
+        ${pb_files}
+        lib/mesh/mesh-pb-constants.cpp
+        lib/mesh/external_callbacks.cpp 
+    INCLUDE_DIRS 
+        "."
+        util/
+        lib/
+        lib/mesh/
+        lib/mesh/generated/
+        lib/log/
+    REQUIRES
+        nanopb
+    PRIV_REQUIRES
+        arduino-esp32
+        # esp_log
+)
 
-include($ENV{IDF_PATH}/tools/cmake/project.cmake)
-
-
-
-# "Trim" the build. Include the minimal set of components, main, and anything it depends on.
-idf_build_set_property(MINIMAL_BUILD ON)
-list(APPEND compile_definitions "ARDUINO_USB_CDC_ON_BOOT=1")
-list(APPEND compile_definitions "ARDUINO_USB_MODE=1")
-
-project(meshtastic-ui-why-m2)
-
-# huuuuh?
-
-idf_build_set_property(CXX_COMPILE_OPTIONS      
+target_compile_options(${COMPONENT_LIB} PRIVATE
       "-w"
       "-Wno-error=format"
       "-Wno-error=overloaded-virtual"
@@ -33,6 +38,7 @@ idf_build_set_property(CXX_COMPILE_OPTIONS
       "-Isrc/mesh/generated"
       "-fpermissive"
       "-DARCH_ESP32"
+      "-DARDUINO_ARCH_ESP32"
       "-DHAS_TFT=1"
       "-DVIEW_320x240"
       "-Ilib"
@@ -40,7 +46,6 @@ idf_build_set_property(CXX_COMPILE_OPTIONS
       "-Ivariants/why2025-m2"
       "-DSERIAL_RX=16"
       "-DSERIAL_TX=15"
-      "-DUSE_SERIAL2"
       "-DUSE_ILOG"
       "-DUSE_ESP_LCD_WHY2025"
       "-I3rdparty/esp_lcd_st7703/include"
@@ -52,4 +57,4 @@ idf_build_set_property(CXX_COMPILE_OPTIONS
       "-DARDUINO_RUNNING_CORE=1"
       "-DARDUINO_EVENT_RUNNING_CORE=1"
       "-DLV_LVGL_H_INCLUDE_SIMPLE"
- APPEND)
+)

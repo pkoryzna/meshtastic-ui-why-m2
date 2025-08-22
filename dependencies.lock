@@ -182,7 +182,7 @@ dependencies:
       type: service
     version: 1.0.18
   espressif/esp_hosted:
-    component_hash: f32400eec7f35652052ae79ecb301148d4011769e94eb8d47262fb22fce933d2
+    component_hash: 3ba803b41ece2c7b138128789b6e579118a787369100adb835f371c0404e3e6a
     dependencies:
     - name: idf
       require: private
@@ -190,7 +190,7 @@ dependencies:
     source:
       registry_url: https://components.espressif.com
       type: service
-    version: 2.2.4
+    version: 2.3.0
   espressif/esp_lcd_st7703:
     component_hash: fdc6a37259eeb69bf02c2dcb44eeb689b1b4d3a8124d4c7eb15d9817067989af
     dependencies:
@@ -207,20 +207,6 @@ dependencies:
     targets:
     - esp32p4
     version: 1.0.3
-  espressif/esp_lvgl_port:
-    component_hash: e720c95cf0667554a204591bb5fade4655fb2990465557041200fa44b5bc7556
-    dependencies:
-    - name: idf
-      require: private
-      version: '>=4.4'
-    - name: lvgl/lvgl
-      registry_url: https://components.espressif.com
-      require: public
-      version: '>=8,<10'
-    source:
-      registry_url: https://components.espressif.com/
-      type: service
-    version: 2.6.0
   espressif/esp_modem:
     component_hash: b541c3f5765d3ba062c0d004b9ca6da6d0af908293421c2dbe046c537fb2a011
     dependencies:
@@ -315,9 +301,8 @@ dependencies:
 direct_dependencies:
 - espressif/arduino-esp32
 - espressif/esp_lcd_st7703
-- espressif/esp_lvgl_port
 - idf
 - lvgl/lvgl
-manifest_hash: b61fc9edda6935b5a7bfdc713da77da384fc18c9e051d8fc9596481a13cdd1fb
+manifest_hash: bf9106de6d77903b9e22d6c8eb69ba52aeb855e6274622d534dbe6e88db03969
 target: esp32p4
 version: 2.0.0
