@@ -8,12 +8,20 @@ include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 
 # "Trim" the build. Include the minimal set of components, main, and anything it depends on.
 idf_build_set_property(MINIMAL_BUILD ON)
+
+# huuuuh? those have to be defined before project?
 list(APPEND compile_definitions "ARDUINO_USB_CDC_ON_BOOT=1")
 list(APPEND compile_definitions "ARDUINO_USB_MODE=1")
+list(APPEND compile_definitions "ARDUINO_USB_MODE=1")
+list(APPEND compile_definitions "CORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_VERBOSE")
+list(APPEND compile_definitions "LOG_LOCAL_LEVEL=ESP_LOG_VERBOSE")
+list(APPEND compile_definitions "CONFIG_ARDUHAL_ESP_LOG")
+list(APPEND compile_definitions "CONFIG_ARDUHAL_LOG_COLORS=1")
+list(APPEND compile_definitions "USE_ILOG")
+list(APPEND compile_definitions "ARDUINO_ARCH_ESP32")
 
 project(meshtastic-ui-why-m2)
 
-# huuuuh?
 
 idf_build_set_property(CXX_COMPILE_OPTIONS      
       "-w"
@@ -22,10 +30,7 @@ idf_build_set_property(CXX_COMPILE_OPTIONS
       "-Wno-error=trigraphs"
       "-std=c++14"
       "-Os"
-      "-DCORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_VERBOSE"
-      "-DLOG_LOCAL_LEVEL=ESP_LOG_VERBOSE"
-      "-DCONFIG_ARDUHAL_ESP_LOG"
-      "-DCONFIG_ARDUHAL_LOG_COLORS=1"
+
       "-DLV_CONF_INCLUDE_SIMPLE=1"
       "-DLV_COMP_CONF_INCLUDE_SIMPLE=1"
       "-DLV_BUILD_TEST=0"
@@ -38,10 +43,6 @@ idf_build_set_property(CXX_COMPILE_OPTIONS
       "-Ilib"
       "-Ilib/mesh/generated"
       "-Ivariants/why2025-m2"
-      "-DSERIAL_RX=16"
-      "-DSERIAL_TX=15"
-      "-DUSE_SERIAL2"
-      "-DUSE_ILOG"
       "-DUSE_ESP_LCD_WHY2025"
       "-I3rdparty/esp_lcd_st7703/include"
       "-I3rdparty/"

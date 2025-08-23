@@ -10,7 +10,6 @@ idf_component_register(SRCS "src/main.cpp"
         SdFat
         nanopb
         MeshtasticProtobuf
-        esp_wifi
         spi_flash
         lvgl
         esp_psram
@@ -19,7 +18,6 @@ idf_component_register(SRCS "src/main.cpp"
         esp_lcd_st7703
         esp_hw_support
         esp_mm
-        esp_hosted
 
     INCLUDE_DIRS
         "."
@@ -50,9 +48,6 @@ target_compile_options(${COMPONENT_LIB} PRIVATE
       "-Ilib"
       "-Ilib/mesh/generated"
       "-Ivariants/why2025-m2"
-      "-DSERIAL_RX=16"
-      "-DSERIAL_TX=15"
-      "-DUSE_SERIAL2"
       "-DUSE_ILOG"
       "-DUSE_ESP_LCD_WHY2025"
       "-I3rdparty/esp_lcd_st7703/include"
