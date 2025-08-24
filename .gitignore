@@ -82,3 +82,9 @@ managed_components/
 # annoying
 .vscode/settings.json
 .DS_Store
+.idea/.gitignore
+.idea/editor.xml
+.idea/meshtastic-ui-why-m2.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
