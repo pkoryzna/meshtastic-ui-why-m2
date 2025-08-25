@@ -42,6 +42,12 @@ https://github.com/n0p/mesthastic-fw-why-badge/tree/why2025-badge
 
 - Would be nice to automatically flash C6 so users have to flash only th P4, like BadgeVMS does.
 
+- Display backlight is (ab)using the status LED functionality of FW running on the C6.
+  Blink for OK makes the backlight turn off for a split second.
+  Would be good to make that independent - GPIO control over custom protobuf messages?
+
+- WiFi is untested.
+
 ### Extra keybindings for badge "function" keys
 |Key|Alternate key|Function|
 |---|---|---|
