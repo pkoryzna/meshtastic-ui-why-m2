@@ -1,4 +1,4 @@
-# Meshtastic UI loader for WHY2025 badge
+# Meshtastic UI standalone for WHY2025 badge
 
 Work in progress: trying to port Meshtastic UI to the WHY2025 badge.
 
@@ -35,13 +35,12 @@ https://github.com/n0p/mesthastic-fw-why-badge/tree/why2025-badge
 ![meshtastic ui showing up and rotated wrong](doc/ui_booted.jpeg)
 
 - UART connects and UI shows up, 
-
-- but it keeps rebooting because it updates some setting on start which causes the FW on C6 to reboot...
+~
+- but it keeps rebooting because it updates some setting on start which causes the FW on C6 to reboot...~
 
 - Screen is not rotated the right way up. Right now, up is towards right.
 
-- Keyboard driver is not finished so there's no input working yet.
-
+- Keyboard driver works but the UI doesn't use arrow keys for navigation (???)
 ## How to build
 
 Clone and init submodules.

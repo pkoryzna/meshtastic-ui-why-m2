@@ -12,7 +12,10 @@ idf_build_set_property(MINIMAL_BUILD ON)
 # huuuuh? those have to be defined before project?
 list(APPEND compile_definitions "ARDUINO_USB_CDC_ON_BOOT=1")
 list(APPEND compile_definitions "ARDUINO_USB_MODE=1")
-list(APPEND compile_definitions "ARDUINO_USB_MODE=1")
+list(APPEND compile_definitions "INPUTDRIVER_TCA8418_KBD_TYPE")
+list(APPEND compile_definitions "I2C_SDA=18")
+list(APPEND compile_definitions "I2C_SCL=20")
+
 list(APPEND compile_definitions "CORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_VERBOSE")
 list(APPEND compile_definitions "LOG_LOCAL_LEVEL=ESP_LOG_VERBOSE")
 list(APPEND compile_definitions "CONFIG_ARDUHAL_ESP_LOG")
