@@ -9,7 +9,7 @@ include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 # "Trim" the build. Include the minimal set of components, main, and anything it depends on.
 idf_build_set_property(MINIMAL_BUILD ON)
 
-# huuuuh? those have to be defined before project?
+# those have to be defined before project or else they won't get applied to components :(
 list(APPEND compile_definitions "ARDUINO_USB_CDC_ON_BOOT=1")
 list(APPEND compile_definitions "ARDUINO_USB_MODE=1")
 list(APPEND compile_definitions "INPUTDRIVER_TCA8418_KBD_TYPE")
@@ -22,6 +22,11 @@ list(APPEND compile_definitions "CONFIG_ARDUHAL_ESP_LOG")
 list(APPEND compile_definitions "CONFIG_ARDUHAL_LOG_COLORS=1")
 list(APPEND compile_definitions "USE_ILOG")
 list(APPEND compile_definitions "ARDUINO_ARCH_ESP32")
+# LVGL cofig 
+list(APPEND compile_definitions "LV_CONF_INCLUDE_SIMPLE")
+list(APPEND compile_definitions "BOARD_HAS_PSRAM")
+list(APPEND compile_definitions "RAM_SIZE=6144") # highest seen on a real device
+include_directories("components/DeviceUI/include")
 
 project(meshtastic-ui-why-m2)
 
@@ -33,9 +38,6 @@ idf_build_set_property(CXX_COMPILE_OPTIONS
       "-Wno-error=trigraphs"
       "-std=c++14"
       "-Os"
-
-      "-DLV_CONF_INCLUDE_SIMPLE=1"
-      "-DLV_COMP_CONF_INCLUDE_SIMPLE=1"
       "-DLV_BUILD_TEST=0"
       "-Isrc"
       "-Isrc/mesh/generated"
@@ -50,7 +52,6 @@ idf_build_set_property(CXX_COMPILE_OPTIONS
       "-I3rdparty/esp_lcd_st7703/include"
       "-I3rdparty/"
       "-DCONFIG_LITTLEFS_PAGE_SIZE=256"
-      "-DBOARD_HAS_PSRAM"
       "-DARDUINO_USB_CDC_ON_BOOT=1"
       "-DARDUINO_USB_MODE=1"
       "-DARDUINO_RUNNING_CORE=1"
