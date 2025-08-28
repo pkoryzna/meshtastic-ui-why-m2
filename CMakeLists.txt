@@ -12,7 +12,6 @@ idf_build_set_property(MINIMAL_BUILD ON)
 # those have to be defined before project or else they won't get applied to components :(
 list(APPEND compile_definitions "ARDUINO_USB_CDC_ON_BOOT=1")
 list(APPEND compile_definitions "ARDUINO_USB_MODE=1")
-list(APPEND compile_definitions "INPUTDRIVER_TCA8418_KBD_TYPE")
 list(APPEND compile_definitions "I2C_SDA=18")
 list(APPEND compile_definitions "I2C_SCL=20")
 
@@ -27,6 +26,8 @@ list(APPEND compile_definitions "LV_CONF_INCLUDE_SIMPLE")
 list(APPEND compile_definitions "BOARD_HAS_PSRAM")
 list(APPEND compile_definitions "RAM_SIZE=6144") # highest seen on a real device
 include_directories("components/DeviceUI/include")
+
+list(APPEND compile_definitions "WHY_BADGE")
 
 project(meshtastic-ui-why-m2)
 
@@ -48,7 +49,6 @@ idf_build_set_property(CXX_COMPILE_OPTIONS
       "-Ilib"
       "-Ilib/mesh/generated"
       "-Ivariants/why2025-m2"
-      "-DUSE_ESP_LCD_WHY2025"
       "-I3rdparty/esp_lcd_st7703/include"
       "-I3rdparty/"
       "-DCONFIG_LITTLEFS_PAGE_SIZE=256"

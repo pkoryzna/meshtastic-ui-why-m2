@@ -45,7 +45,6 @@ target_compile_options(${COMPONENT_LIB} PRIVATE
       "-Ilib/mesh/generated"
       "-Ivariants/why2025-m2"
       "-USE_ILOG"
-      "-DUSE_ESP_LCD_WHY2025"
       "-I3rdparty/esp_lcd_st7703/include"
       "-I3rdparty/"
       "-DCONFIG_LITTLEFS_PAGE_SIZE=256"
