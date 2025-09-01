@@ -25,6 +25,15 @@ idf_component_register(SRCS "src/main.cpp"
         "meshtastic_fw_version"
     )
 
+file(READ "meshtastic_fw_version" MESHTASTIC_VER)
+
+add_custom_target(firmware-why2025-carrier.bin
+        COMMAND ${COMPONENT_DIR}/get_firmware.sh ${MESHTASTIC_VER}
+)
+
+add_dependencies(${COMPONENT_LIB} firmware-why2025-carrier.bin)
+
+target_add_binary_data(${COMPONENT_LIB} ${CMAKE_CURRENT_BINARY_DIR}/firmware-why2025-carrier.bin BINARY )
 
 target_compile_options(${COMPONENT_LIB} PRIVATE
       "-w"
