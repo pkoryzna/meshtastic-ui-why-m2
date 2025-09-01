@@ -10,6 +10,3 @@
 [submodule "3rdparty/meshtastic-device-ui"]
 	path = 3rdparty/meshtastic-device-ui
 	url = https://github.com/pkoryzna/meshtastic-device-ui.git
-[submodule "3rdparty/meshtastic-standalone-ui"]
-	path = 3rdparty/meshtastic-standalone-ui
-	url = https://github.com/pkoryzna/meshtastic-standalone-ui.git

@@ -1,4 +1,4 @@
-idf_component_register(SRCS "src/main.cpp"
+idf_component_register(SRCS "main.cpp"
     REQUIRES
         MeshtasticProtobuf                    
     PRIV_REQUIRES
