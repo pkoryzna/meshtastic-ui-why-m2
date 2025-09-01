@@ -21,6 +21,8 @@ idf_component_register(SRCS "src/main.cpp"
 
     INCLUDE_DIRS
         "."
+    EMBED_TXTFILES
+        "meshtastic_fw_version"
     )
 
 
