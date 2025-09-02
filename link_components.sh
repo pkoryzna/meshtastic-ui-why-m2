@@ -41,3 +41,13 @@ for FILE in $MESHTASTIC_PROTOBUF_FILES; do
 done
 unset FILE
 popd
+
+pushd main
+STANDALONE_UI_FILES="3rdparty/meshtastic-standalone-ui/3rdparty 3rdparty/meshtastic-standalone-ui/src"
+for FILE in $STANDALONE_UI_FILES; do
+    ln -f -s ../$FILE .
+done
+unset FILE
+popd
+
+
