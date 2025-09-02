@@ -181,8 +181,25 @@ dependencies:
       registry_url: https://components.espressif.com
       type: service
     version: 1.0.18
+  espressif/esp-serial-flasher:
+    component_hash: b06d58e01a43728d61fe344ceaeca192d46e159a3d6c15d40d968dc8e34fa357
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=4.3'
+    - name: espressif/usb_host_cdc_acm
+      registry_url: https://components.espressif.com
+      require: private
+      rules:
+      - if: idf_version >=4.4
+      - if: target in [esp32s2, esp32s3]
+      version: ^2
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.9.0
   espressif/esp_hosted:
-    component_hash: 3ba803b41ece2c7b138128789b6e579118a787369100adb835f371c0404e3e6a
+    component_hash: 22b4d101d7757ae67826f9f6be19efcdad66a95071271e6559a705964652883c
     dependencies:
     - name: idf
       require: private
@@ -190,7 +207,7 @@ dependencies:
     source:
       registry_url: https://components.espressif.com
       type: service
-    version: 2.3.0
+    version: 2.3.2
   espressif/esp_lcd_st7703:
     component_hash: fdc6a37259eeb69bf02c2dcb44eeb689b1b4d3a8124d4c7eb15d9817067989af
     dependencies:
@@ -300,9 +317,10 @@ dependencies:
     version: 9.3.0
 direct_dependencies:
 - espressif/arduino-esp32
+- espressif/esp-serial-flasher
 - espressif/esp_lcd_st7703
 - idf
 - lvgl/lvgl
-manifest_hash: bf9106de6d77903b9e22d6c8eb69ba52aeb855e6274622d534dbe6e88db03969
+manifest_hash: 76b4f4eea2910923b4b877f33eb511661b40b58f86176ce7f0d456578ecf1457
 target: esp32p4
 version: 2.0.0

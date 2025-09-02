@@ -4,3 +4,4 @@ dependencies:
   espressif/esp_lcd_st7703: ^1.0.3
   espressif/arduino-esp32: ^3.3.0
   lvgl/lvgl: ^9.3.0
+  espressif/esp-serial-flasher: ^1.9.0
