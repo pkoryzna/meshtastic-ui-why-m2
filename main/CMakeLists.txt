@@ -1,5 +1,5 @@
 idf_component_register(SRCS
-        "src/main.cpp"
+        "main.cpp"
         "c6_fw_flasher.cpp"
     PRIV_REQUIRES
         esp_driver_uart
