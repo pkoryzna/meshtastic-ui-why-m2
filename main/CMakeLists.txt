@@ -33,7 +33,8 @@ add_custom_target(firmware-why2025-carrier.bin
 
 add_dependencies(${COMPONENT_LIB} firmware-why2025-carrier.bin)
 
-target_add_binary_data(${COMPONENT_LIB} ${CMAKE_CURRENT_BINARY_DIR}/firmware-why2025-carrier.bin BINARY )
+target_add_binary_data(${COMPONENT_LIB} ${CMAKE_CURRENT_BINARY_DIR}/firmware-why2025-carrier.bin BINARY)
+target_add_binary_data(${COMPONENT_LIB} ${CMAKE_CURRENT_BINARY_DIR}/firmware-why2025-carrier.bin.md5 TEXT)
 
 target_compile_options(${COMPONENT_LIB} PRIVATE
       "-w"

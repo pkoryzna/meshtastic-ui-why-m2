@@ -27,3 +27,5 @@ CHECKSUM=$(echo $DIGEST | cut -d: -f2 | tee $FILENAME.checksum)
 ALGO=$(echo $DIGEST | cut -d: -f1 | sed "s/sha//")
 
 shasum --alg $ALGO $FILENAME | grep $CHECKSUM
+
+md5sum $FILENAME | cut -d' ' -f1 > $FILENAME.md5

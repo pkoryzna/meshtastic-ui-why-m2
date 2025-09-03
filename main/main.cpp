@@ -22,9 +22,11 @@ const char *firmware_version = (char*)fw_version_start;
 IClientBase *client = nullptr;
 DeviceScreen *screen = nullptr;
 
+void flash_c6_if_needed();
+
 void setup()
 {
-
+    flash_c6_if_needed();
 #ifndef USE_SERIAL0
 #ifdef WAIT_FOR_SERIAL0
     delay(2000);
