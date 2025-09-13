@@ -9,7 +9,7 @@ if [ -z "$VERSION" ];  then
 fi
 TAG=v$VERSION
 
-ARTIFACT_FILENAME=firmware-why2025-carrier-$VERSION-update.bin
+ARTIFACT_FILENAME=firmware-why2025-carrier-$VERSION.bin
 FILENAME=firmware-why2025-carrier.bin
 #mkdir -p build
 
