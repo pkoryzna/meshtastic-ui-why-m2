@@ -27,15 +27,20 @@ idf_component_register(SRCS
 
 file(READ "meshtastic_fw_version" MESHTASTIC_VER)
 
-add_custom_target(firmware-why2025-carrier.bin
+add_custom_target(firmware-why2025-carrier ALL
         COMMAND ${COMPONENT_DIR}/get_firmware.sh ${MESHTASTIC_VER}
 )
 
-add_dependencies(${COMPONENT_LIB} firmware-why2025-carrier.bin)
+add_dependencies(${COMPONENT_LIB} firmware-why2025-carrier)
 
-target_add_binary_data(${COMPONENT_LIB} ${CMAKE_CURRENT_BINARY_DIR}/firmware-why2025-carrier.bin BINARY)
-target_add_binary_data(${COMPONENT_LIB} ${CMAKE_CURRENT_BINARY_DIR}/firmware-why2025-carrier.bin.md5 TEXT)
-
+target_add_binary_data(${COMPONENT_LIB} ${CMAKE_CURRENT_BINARY_DIR}/c6-boot_app0.bin BINARY)
+target_add_binary_data(${COMPONENT_LIB} ${CMAKE_CURRENT_BINARY_DIR}/c6-boot_app0.bin.md5 TEXT)
+target_add_binary_data(${COMPONENT_LIB} ${CMAKE_CURRENT_BINARY_DIR}/c6-bootloader.bin BINARY)
+target_add_binary_data(${COMPONENT_LIB} ${CMAKE_CURRENT_BINARY_DIR}/c6-bootloader.bin.md5 TEXT)
+target_add_binary_data(${COMPONENT_LIB} ${CMAKE_CURRENT_BINARY_DIR}/c6-partitions.bin BINARY)
+target_add_binary_data(${COMPONENT_LIB} ${CMAKE_CURRENT_BINARY_DIR}/c6-partitions.bin.md5 TEXT)
+target_add_binary_data(${COMPONENT_LIB} ${CMAKE_CURRENT_BINARY_DIR}/c6-firmware.bin BINARY)
+target_add_binary_data(${COMPONENT_LIB} ${CMAKE_CURRENT_BINARY_DIR}/c6-firmware.bin.md5 TEXT)
 target_compile_options(${COMPONENT_LIB} PRIVATE
       "-w"
       "-Wno-error=format"
