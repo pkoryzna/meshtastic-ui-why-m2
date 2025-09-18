@@ -27,8 +27,17 @@ idf_component_register(SRCS
 
 file(READ "meshtastic_fw_version" MESHTASTIC_VER)
 
-add_custom_target(firmware-why2025-carrier ALL
+add_custom_target(firmware-why2025-carrier
         COMMAND ${COMPONENT_DIR}/get_firmware.sh ${MESHTASTIC_VER}
+        BYPRODUCTS
+        ${CMAKE_CURRENT_BINARY_DIR}/c6-boot_app0.bin
+        ${CMAKE_CURRENT_BINARY_DIR}/c6-boot_app0.bin.md5
+        ${CMAKE_CURRENT_BINARY_DIR}/c6-bootloader.bin
+        ${CMAKE_CURRENT_BINARY_DIR}/c6-bootloader.bin.md5
+        ${CMAKE_CURRENT_BINARY_DIR}/c6-partitions.bin
+        ${CMAKE_CURRENT_BINARY_DIR}/c6-partitions.bin.md5
+        ${CMAKE_CURRENT_BINARY_DIR}/c6-firmware.bin
+        ${CMAKE_CURRENT_BINARY_DIR}/c6-firmware.bin.md5
 )
 
 add_dependencies(${COMPONENT_LIB} firmware-why2025-carrier)
