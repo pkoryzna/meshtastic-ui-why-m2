@@ -21,7 +21,7 @@ jobs:
           esp_idf_version: v5.5
           target: esp32p4
           path: .
-          command: ' idf.py build merge-bin -o merged.bin -f hex'
+          command: 'apt update && apt install -y jq && idf.py build merge-bin -o merged.bin -f hex'
       - name: Store binaries as an artifact
         uses: actions/upload-artifact@v4
         with:
