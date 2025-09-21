@@ -1,0 +1,1 @@
+ESP-IDF component for the meshtastic-standalone-ui library bits we need for our `main.cpp`, such as logging.

@@ -16,7 +16,7 @@ message(STATUS "Using Generated View: " ${GENERATED_VIEW})
 # include(nanopb)
 # include(Doctest)
 
-file(GLOB_RECURSE sources      source/* generated/* locale/* generated/${GENERATED_VIEW}/* source/util/* drivers/*)
+file(GLOB_RECURSE sources      src/* source/* generated/* locale/* generated/${GENERATED_VIEW}/* source/util/* drivers/*)
 file(GLOB_RECURSE sources_test tests/*.cpp)
 
 idf_component_register(

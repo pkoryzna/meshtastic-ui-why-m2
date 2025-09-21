@@ -10,6 +10,7 @@ idf_component_register(SRCS
         SdFat
         nanopb
         MeshtasticProtobuf
+        MeshtasticStandalone
         spi_flash
         lvgl
         esp_psram

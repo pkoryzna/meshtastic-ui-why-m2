@@ -1,0 +1,46 @@
+file(GLOB LOG_SRC_FILES lib/log/*.cpp)
+idf_component_register(
+    SRCS
+        ${LOG_SRC_FILES}
+    INCLUDE_DIRS
+        lib/
+        lib/log/
+    REQUIRES
+    PRIV_REQUIRES
+        arduino-esp32
+)
+target_compile_options(${COMPONENT_LIB} PRIVATE
+        "-w"
+        "-Wno-error=format"
+        "-Wno-error=overloaded-virtual"
+        "-Wno-error=trigraphs"
+        "-std=c++14"
+        "-Os"
+        "-DCORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_VERBOSE"
+        "-DLOG_LOCAL_LEVEL=ESP_LOG_VERBOSE"
+        "-DCONFIG_ARDUHAL_ESP_LOG"
+        "-DCONFIG_ARDUHAL_LOG_COLORS=1"
+        "-DLV_CONF_INCLUDE_SIMPLE=1"
+        "-DLV_COMP_CONF_INCLUDE_SIMPLE=1"
+        "-DLV_BUILD_TEST=0"
+        "-Isrc"
+        "-Isrc/mesh/generated"
+        "-fpermissive"
+        "-DARCH_ESP32"
+        "-DARDUINO_ARCH_ESP32"
+        "-DHAS_TFT=1"
+        "-DVIEW_320x240"
+        "-Ilib"
+        "-Ilib/mesh/generated"
+        "-Ivariants/why2025-m2"
+        "-DUSE_ILOG"
+        "-I3rdparty/esp_lcd_st7703/include"
+        "-I3rdparty/"
+        "-DCONFIG_LITTLEFS_PAGE_SIZE=256"
+        "-DBOARD_HAS_PSRAM"
+        "-DARDUINO_USB_CDC_ON_BOOT=1"
+        "-DARDUINO_USB_MODE=1"
+        "-DARDUINO_RUNNING_CORE=1"
+        "-DARDUINO_EVENT_RUNNING_CORE=0"
+        "-DLV_LVGL_H_INCLUDE_SIMPLE"
+)

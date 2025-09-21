@@ -1,23 +1,16 @@
-file(GLOB pb_files lib/mesh/generated/meshtastic/*.pb.cpp)
+file(GLOB pb_files src/mesh/generated/meshtastic/*.pb.cpp)
 idf_component_register(
     SRCS 
-        lib/log/Log.cpp
-        util/ILog.cpp
         ${pb_files}
-        lib/mesh/mesh-pb-constants.cpp
-        lib/mesh/external_callbacks.cpp 
-    INCLUDE_DIRS 
+    INCLUDE_DIRS
         "."
-        util/
-        lib/
-        lib/mesh/
-        lib/mesh/generated/
-        lib/log/
+        src/
+        src/mesh/
+        src/mesh/generated/
     REQUIRES
         nanopb
     PRIV_REQUIRES
         arduino-esp32
-        # esp_log
 )
 
 target_compile_options(${COMPONENT_LIB} PRIVATE
