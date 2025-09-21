@@ -24,7 +24,7 @@ jobs:
           command: 'apt update && apt install -y jq && idf.py build merge-bin -o meshtastic-fw-why-badge-m2-${{github.sha}}.bin -f hex'
       - name: Create ESP web flasher manifest JSON
         run: |
-          cat | manifest.json <<EOF
+          cat > manifest.json <<EOF
           {
             "name": "Meshtastic for WHY2025 badge combo FW (ESP32-P4 M.2 module + C6 on carrier)",
             "version": "${{github.sha}}",
