@@ -12,7 +12,7 @@
 	url = https://github.com/pkoryzna/meshtastic-device-ui.git
 [submodule "3rdparty/meshtastic-standalone-ui"]
 	path = 3rdparty/meshtastic-standalone-ui
-	url = https://github.com/pkoryzna/meshtastic-standalone-ui.git
+	url = https://github.com/meshtastic/standalone-ui
 [submodule "3rdparty/protobufs"]
 	path = 3rdparty/protobufs
 	url = https://github.com/meshtastic/protobufs.git
