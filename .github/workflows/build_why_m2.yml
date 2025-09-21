@@ -1,6 +1,8 @@
 name: Build WHY2025 Badge M.2 board FW
 on:
   push:
+    tags:
+      - v*
     branches:
       - main
   workflow_dispatch:
