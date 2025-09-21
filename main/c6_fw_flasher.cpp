@@ -2,7 +2,7 @@
 #include <esp32_port.h>
 #include <esp_err.h>
 #include <driver/uart.h>
-#include <driver/GPIO.h>
+#include <driver/gpio.h>
 #include <esp_log.h>
 
 #include "esp32-hal.h"
