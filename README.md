@@ -106,3 +106,27 @@ Install ESP-IDF v5.5 and use the regular `idf.py` commands like `build` etc.
 ## Why not just build meshtastic-standalone-ui for P4?
 
 I could not get it to work with platformio or pioarduino, so I'm trying with ESP-IDF.
+
+## Architecture
+
+As implemented now, the badge is 2 computers in one :)
+
+ESP32-C6 on the carrier board runs the Meshtastic firmware from its own flash, 
+talks to LoRA chip, BLE, is a more or less full bona fide Meshtastic node.
+
+The C6 firmware is configured to expose Protobuf serial on TX/RX pins
+connected to the M.2 carrier card.
+
+ESP32-P4 functions as a "standalone" client that connects to the node via UART,
+controls the display and keyboard. However, the keyboard and display's backlight
+are controlled from the C6. Vibration is controlled via GPIO on P4.
+
+Maybe in the future it could be possible to run only the LoRA interface on C6,
+and rest of the firmware on P4? That'd be a more sustainable approach, I think.
+
+### Connections diagram
+
+This does not include all the modules and interfaces present on the badge!
+Check the [Team:Badge Hardware repository for full schematics!](https://gitlab.com/why2025/team-badge/Hardware)
+
+![WHY2025 Badge Meshtastic architecture.drawio.png](doc/WHY2025%20Badge%20Meshtastic%20architecture.drawio.png)
