@@ -22,12 +22,6 @@ jobs:
           target: esp32p4
           path: .
           command: 'apt update && apt install -y jq && idf.py build merge-bin -o meshtastic-fw-why-badge-m2-${{github.sha}}.bin -f hex'
-      - name: Store binaries as an artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: meshtastic-why2025-m2-firmware-${{github.sha}}
-          overwrite: true
-          path: build/meshtastic-fw-why-badge-m2-${{github.sha}}.bin
       - name: Create ESP web flasher manifest JSON
         run: |
           cat > manifest.json <<EOF
@@ -48,17 +42,19 @@ jobs:
             ]
           }
           EOF
-      - name: Store manifest as an artifact
+      - name: Store binaries as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: meshtastic-why2025-m2-firmware-${{github.sha}}
           overwrite: true
-          path: manifest.json
+          path: |
+            build/meshtastic-fw-why-badge-m2-${{github.sha}}.bin
+            manifest.json
       - name: Release
         uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
         with:
           files: |
-            meshtastic-fw-why-badge-m2-${{github.sha}}.bin
+            build/meshtastic-fw-why-badge-m2-${{github.sha}}.bin
             manifest.json
           fail_on_unmatched_files: true
