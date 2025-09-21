@@ -62,3 +62,23 @@ jobs:
             build/meshtastic-fw-why-badge-m2-${{github.sha}}.bin
             manifest.json
           fail_on_unmatched_files: true
+      - name: copy GitHub Pages artifacts
+        run: cp build/meshtastic-fw-why-badge-m2-${{github.sha}}.bin manifest.json web-flasher/
+      - name: Upload GitHub Pages artifact
+        if: github.ref_type == 'tag'
+        id: pages_deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: web-flasher/
+
+  deploy-page:
+    if: github.ref_type == 'tag'
+    environment:
+      name: github-pages
+      url: ${{ steps.pages_deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: pages_deployment
+        uses: actions/deploy-pages@v4
