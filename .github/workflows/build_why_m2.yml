@@ -72,6 +72,9 @@ jobs:
           path: web-flasher/
 
   deploy-page:
+    permissions:
+      id-token: write
+      pages: write
     if: github.ref_type == 'tag'
     environment:
       name: github-pages
