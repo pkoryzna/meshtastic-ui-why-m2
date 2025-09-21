@@ -43,6 +43,7 @@ popd
 
 pushd components/MeshtasticStandalone || exit 1
 STANDALONE_UI_LOG_LIB_FILES="3rdparty/meshtastic-standalone-ui/lib/log"
+rm -f lib/log
 mkdir -p lib/
 ln -f -s ../../../$STANDALONE_UI_LOG_LIB_FILES lib/log
 popd
