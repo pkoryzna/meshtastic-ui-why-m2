@@ -7,8 +7,8 @@ on:
     branches:
       - main
     paths:
-      - .github/
-      - web-flasher/
+      - .github/**
+      - web-flasher/**
   workflow_dispatch:
 
 
