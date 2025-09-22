@@ -31,7 +31,6 @@ jobs:
           gh release download --pattern meshtastic-fw-why-badge-m2-*.bin
           gh release download --pattern manifest.json
       - name: Upload GitHub Pages artifact
-        if: github.ref_type == 'tag'
         id: pages_deployment
         uses: actions/upload-pages-artifact@v3
         with:
@@ -41,7 +40,6 @@ jobs:
     permissions:
       id-token: write
       pages: write
-    if: github.ref_type == 'tag'
     environment:
       name: github-pages
       url: ${{ steps.pages_deployment.outputs.page_url }}
