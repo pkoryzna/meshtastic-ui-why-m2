@@ -1,0 +1,64 @@
+.markdown-body {
+    max-width: 90vw;
+
+    h1 {
+        text-align: center;
+        font-size: 1.5em; 
+    }
+
+    @media screen and (max-width: 600px) {
+        img {
+            max-width: 90vw;
+        }
+    }
+      
+    @media screen and (min-width: 601px) {
+        img {
+            margin: 2vh;
+            max-width: 20vw;
+        }
+        p:nth-child(3) > img {
+            float: right;
+        }
+
+        p:nth-child(36) > img {
+            max-width: 95%;
+        }
+    }
+     
+
+    
+   
+    
+
+    a {
+        text-decoration: underline;
+        color: red;
+        word-wrap: break-word;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 40%;
+        margin: 2vh; 
+        @media screen and (max-width: 600px) {
+            width: 100%;
+
+        }
+
+      }
+    
+      table:nth-child(20) {
+        width: 95%;
+      }
+
+    table, th, td {
+        border: 1px solid;
+      }
+
+      th, td {
+        padding: 10px;
+      }
+}
+
+
