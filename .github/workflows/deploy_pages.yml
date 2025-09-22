@@ -24,6 +24,8 @@ jobs:
         with:
           submodules: 'recursive'
       - name: Download FW binary from latest release
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           cd web-flasher/
           gh release download --pattern meshtastic-fw-why-badge-m2-*.bin
