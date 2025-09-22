@@ -1,0 +1,51 @@
+name: Deploy GitHub Pages
+on:
+  release:
+    types:
+      - published
+  push:
+    branches:
+      - main
+    paths:
+      - .github/
+      - web-flasher/
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+      - name: Download FW binary from latest release
+        run: |
+          cd web-flasher/
+          gh release download --pattern meshtastic-fw-why-badge-m2-*.bin
+          gh release download --pattern manifest.json
+      - name: Upload GitHub Pages artifact
+        if: github.ref_type == 'tag'
+        id: pages_deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: web-flasher/
+
+  deploy-page:
+    permissions:
+      id-token: write
+      pages: write
+    if: github.ref_type == 'tag'
+    environment:
+      name: github-pages
+      url: ${{ steps.pages_deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: pages_deployment
+        uses: actions/deploy-pages@v4
