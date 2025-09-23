@@ -1,11 +1,11 @@
+#ifndef WHY_BADGE_CUSTOM_C6_FW
+
 #include <esp_loader.h>
 #include <esp32_port.h>
 #include <esp_err.h>
 #include <driver/uart.h>
 #include <driver/gpio.h>
 #include <esp_log.h>
-
-#include "esp32-hal.h"
 
 esp_loader_error_t err;
 
@@ -33,7 +33,7 @@ const char* TAG = "c6_fw_flasher";
 constexpr uint32_t DEFAULT_BAUD_RATE = 115200;
 constexpr uint32_t HIGH_BAUD_RATE = DEFAULT_BAUD_RATE;
 
-constexpr uint32_t after_reboot_delay_ms = 200;
+constexpr uint32_t after_reboot_delay_ms = 0;
 
 esp_loader_error_t init_connection_for_flashing()
 {
@@ -80,7 +80,7 @@ esp_loader_error_t init_connection_for_flashing()
     return ESP_LOADER_SUCCESS;
 }
 
-esp_loader_error_t flash_c6_fw(uint32_t offset, uint32_t image_size, uint8_t* image_data)
+esp_loader_error_t flash_c6_fw(const uint32_t offset, const uint32_t image_size, const uint8_t* image_data)
 {
     constexpr uint32_t block_size = 4*1024;
 
@@ -117,52 +117,50 @@ esp_loader_error_t flash_c6_fw(uint32_t offset, uint32_t image_size, uint8_t* im
     return ESP_LOADER_SUCCESS;
 }
 
+esp_loader_error_t check_and_flash_region(const uint32_t offset, const uint32_t image_size, const uint8_t* md5sum, const uint8_t* image_data, const char* name)
+{
+    ESP_LOGI(TAG, "Checking '%s' at offset 0x%02x size %u, expected md5 sum '%s'", name, offset, image_size, md5sum);
+    auto verify_result = esp_loader_flash_verify_known_md5(offset, image_size, md5sum);
+    if (verify_result == ESP_LOADER_SUCCESS)
+    {
+        ESP_LOGI(TAG, "'%s' checksum matches", name);
+        return ESP_LOADER_SUCCESS;
+    }
+
+    ESP_LOGI(TAG, "Got error code %u, flashing '%s'", verify_result, name);
+    auto flash_result = flash_c6_fw(offset, image_size, image_data);
+    if (flash_result != ESP_LOADER_SUCCESS)
+    {
+        ESP_LOGE(TAG, "Flashing '%s' failed with error %u", flash_result);
+        return flash_result;
+    }
+    ESP_LOGI(TAG, "'%s' flashed succesfully", name);
+    return ESP_LOADER_SUCCESS;
+}
+
+
 esp_loader_error_t flash_bootloader()
 {
     uint32_t size = c6_bootloader_bin_end - c6_bootloader_bin_start;
-
-    auto result = esp_loader_flash_verify_known_md5(c6_bootloader_offset, size, c6_bootloader_bin_md5);
-    if (result != ESP_LOADER_SUCCESS)
-    {
-        return flash_c6_fw(c6_bootloader_offset, size, (uint8_t*)c6_bootloader_bin_start);
-    }
-    return ESP_LOADER_SUCCESS;
+    return check_and_flash_region(c6_bootloader_offset, size, c6_bootloader_bin_md5, c6_bootloader_bin_start, "bootloader");
 }
 
 esp_loader_error_t flash_boot_app0()
 {
     uint32_t size = c6_boot_app0_bin_end - c6_boot_app0_bin_start;
-
-    auto result = esp_loader_flash_verify_known_md5(c6_boot_app0_offset, size, c6_boot_app0_bin_md5);
-    if (result != ESP_LOADER_SUCCESS)
-    {
-        return flash_c6_fw(c6_boot_app0_offset, size, (uint8_t*)c6_boot_app0_bin_start);
-    }
-    return ESP_LOADER_SUCCESS;
+    return check_and_flash_region(c6_boot_app0_offset, size, c6_boot_app0_bin_md5, c6_boot_app0_bin_start, "boot_app0");
 }
 
 esp_loader_error_t flash_firmware()
 {
     uint32_t size = c6_firmware_bin_end - c6_firmware_bin_start;
-
-    esp_loader_error_t result = esp_loader_flash_verify_known_md5(c6_firmware_offset, size, c6_firmware_bin_md5);
-    if (result != ESP_LOADER_SUCCESS)
-    {
-        return flash_c6_fw(c6_firmware_offset, size, (uint8_t*)c6_firmware_bin_start);
-    }
-    return ESP_LOADER_SUCCESS;
+    return check_and_flash_region(c6_firmware_offset, size, c6_firmware_bin_md5, c6_firmware_bin_start, "firmware");
 }
 
 esp_loader_error_t flash_partitions()
 {
     uint32_t size = c6_partitions_bin_end - c6_partitions_bin_start;
-
-    auto result = esp_loader_flash_verify_known_md5(c6_partitions_bin_offset, size, c6_partitions_bin_md5);
-    if (result != ESP_LOADER_SUCCESS)
-    {
-        return flash_c6_fw(c6_partitions_bin_offset, size, (uint8_t*)c6_partitions_bin_start);
-    }
-    return ESP_LOADER_SUCCESS;
+    return check_and_flash_region(c6_partitions_bin_offset, size, c6_partitions_bin_md5, c6_partitions_bin_start, "partitions");
 }
 
 esp_loader_error_t flash_c6_if_needed()
@@ -204,6 +202,8 @@ esp_loader_error_t flash_c6_if_needed()
 
     ESP_LOGI(TAG, "flashing all OK, resetting C6 and waiting %d ms", after_reboot_delay_ms);
     esp_loader_reset_target();
-    delay(after_reboot_delay_ms);
+    vTaskDelay(pdMS_TO_TICKS(after_reboot_delay_ms));
     return ESP_LOADER_SUCCESS;
 }
+
+#endif

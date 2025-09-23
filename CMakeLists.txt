@@ -29,6 +29,11 @@ include_directories("components/DeviceUI/include")
 
 list(APPEND compile_definitions "WHY_BADGE")
 
+# Define WHY_BADGE_CUSTOM_C6_FW if you want to use custom firmware on C6 chip
+# this disables the built-in serial flasher completely
+# so that your custom FW doesn't get erased
+#list(APPEND compile_definitions "WHY_BADGE_CUSTOM_C6_FW")
+
 project(meshtastic-ui-why-m2)
 
 

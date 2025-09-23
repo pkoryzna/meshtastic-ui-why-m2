@@ -27,12 +27,17 @@ esp_loader_error_t flash_c6_if_needed();
 
 void setup()
 {
+#ifndef WHY_BADGE_CUSTOM_C6_FW
     esp_loader_error_t esp_loader_error = flash_c6_if_needed();
     if (esp_loader_error != ESP_LOADER_SUCCESS)
     {
         ILOG_CRIT("failed to flash c6 with error %d", esp_loader_error);
         return;
     }
+#elif defined(WHY_BADGE)
+    ILOG_INFO("Firmware compiled with WHY_BADGE_CUSTOM_C6_FW, skipping C6 flashing.");
+#endif
+
 #ifndef USE_SERIAL0
 #ifdef WAIT_FOR_SERIAL0
     delay(2000);
