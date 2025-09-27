@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Flasher for the Meshtastic WHY2025 badge">
     <title>Meshtastic for WHY2025 Badge flasher</title>
     <link rel="stylesheet" href="main.css">
     <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@3?register"></script>
@@ -35,9 +36,19 @@
             <p>Connect to the USB-C port on the left side of the badge.</p>
         </section>
         <section id="installer">
-        <esp-web-install-button
-                manifest="manifest.json"
-        ></esp-web-install-button>
+
+
+            <esp-web-install-button
+            manifest="manifest.json"
+          >
+            <button slot="activate">Connect to the badge</button>
+            <span slot="unsupported">This tool only works on browsers that support Web Serial, for example Chrome.</span>
+            <span slot="not-allowed">Please switch to HTTPS</span>
+          </esp-web-install-button>
+              
+
+
+
         </section>
         <section id="readme">
            <zero-md src="https://raw.githubusercontent.com/pkoryzna/meshtastic-ui-why-m2/refs/heads/main/README.md">
