@@ -10,3 +10,4 @@ fi
 LATEST_RELEASE="$(git describe main --tags --abbrev=0 --match='v*')"
 GIT_SHA_SHORT="$(git rev-parse --short HEAD)"
 NEW_RELEASE_TAG_NAME="v${MESHTASTIC_FW_VER}+${GIT_SHA_SHORT}"
+git tag "$NEW_RELEASE_TAG_NAME"
