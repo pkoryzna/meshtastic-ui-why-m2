@@ -16,10 +16,10 @@ between ESP32-C6 chip and the LoRA module.
 
 This is documented in the original WHY2025 Wiki article: https://wiki.why2025.org/Project:Meshtastic_on_the_WHY2025_badge
 
-| C6 pin | Radio pin | Function     |
-|--------|-----------|--------------|
-| 5      | 6         | GPIO5 - CAD  | 
-| 12     | 10        | GPIO11 - BUSY |
+| C6 pin | Radio pin | C6 function | Modem function |
+|--------|-----------|-------------|----------------|
+| 5      | 6         | GPIO5       | CAD            | 
+| 12     | 10        | GPIO11      | BUSY           |
 
 ![Photo of soldered extra wires between C6 and LoRA chip](doc/lora-bodge.jpg)
 
@@ -33,7 +33,7 @@ can be quite bad on 868 band in EU, consider replacing it (or tuning.)
 
 Simplest way with web flasher and Chrome-based browser: https://pkoryzna.github.io/meshtastic-ui-why-m2/
 
-For other OSes:
+For other OSes/browsers:
 
 - install [esptool.py](https://docs.espressif.com/projects/esptool/en/latest/esp32p4/index.html) for your OS
 - [go to the latest release](https://github.com/pkoryzna/meshtastic-ui-why-m2/releases/latest)
@@ -47,15 +47,10 @@ For other OSes:
 
 - Internally UART connects and UI shows up, mostly functional. Please test.
 
-- Some UI functionality seems to be exclusively available through touch. 
-It's possible to "soft-lock" yourself out of some things. TODO
-
-- for example if you don't have the map tiles on SD card the silly banner will cover up the screen (TODO turn it off)
-
-- UI is not built for keyboard navigation. We'll need to fix that in device-ui upstream eventually.
+- Some UI functionality seems to be exclusively available through touch. UI is not built for keyboard navigation. We'll need to fix that in device-ui upstream eventually.
 
 - C6 automatically gets flashed so users have to flash only th P4, like BadgeVMS.
-**The first bootup can take a few minutes due to this flashing process.** 
+**The first bootup after upgrade can take a few minutes due to this flashing process.** 
 
 - Display and KB backlight is currently hacked into the C6 FW. 
 There is no easy way to enable it during flashing at the moment.
