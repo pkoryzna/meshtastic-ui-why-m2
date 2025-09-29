@@ -96,6 +96,7 @@ esp_loader_error_t flash_c6_fw(const uint32_t offset, const uint32_t image_size,
     uint32_t flashed = 0;
     auto buf = (uint8_t*)malloc(block_size);
     assert(buf != NULL);
+    uint32_t last_percent = 0;
     while (flashed < image_size)
     {
         uint32_t to_write = MIN(block_size, image_size-flashed);
@@ -108,7 +109,12 @@ esp_loader_error_t flash_c6_fw(const uint32_t offset, const uint32_t image_size,
             return err;
         }
         flashed += to_write;
-        // ESP_LOGI(TAG, "Flashed %d bytes, %d left", flashed, image_size - flashed);
+        uint32_t flashed_percent = (flashed * 100 / image_size);
+        if (last_percent != flashed_percent)
+        {
+            ESP_LOGI(TAG, "Flashed %d bytes (%d%%)", flashed, flashed_percent);
+            last_percent = flashed_percent;
+        }
     }
     ESP_LOGI(TAG, "Done flashing %d bytes", flashed);
     free(buf);
