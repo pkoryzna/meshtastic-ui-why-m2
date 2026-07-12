@@ -316,6 +316,14 @@ dependencies:
       registry_url: https://components.espressif.com
       type: service
     version: 1.22.2
+  lovyan03/LovyanGFX:
+    component_hash: f86c0c81bb7398903bafb4c060ee200ff0e4bacbae1a60a2b926a1583dc71d23
+    dependencies: []
+    source:
+      git: https://github.com/lovyan03/LovyanGFX
+      path: .
+      type: git
+    version: 5d12a3b85f92b704d03780754f5562221a3bea3f
   lvgl/lvgl:
     component_hash: b702d642e03e95928046d5c6726558e6444e112420c77efa5fdb6650b0a13c5d
     dependencies: []
@@ -329,7 +337,8 @@ direct_dependencies:
 - espressif/esp-serial-flasher
 - espressif/esp_lcd_st7703
 - idf
+- lovyan03/LovyanGFX
 - lvgl/lvgl
-manifest_hash: cf72c16b5cde20407f675f9750e961868b33aa4c52a5a3040753634e4b040279
+manifest_hash: 20265573d920c0315d71d11306c0734a2a4b8adef8bfb840636b3618d50ce463
 target: esp32p4
 version: 2.0.0
