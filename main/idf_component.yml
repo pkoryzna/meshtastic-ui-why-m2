@@ -9,3 +9,7 @@ dependencies:
     git: https://github.com/adafruit/Adafruit_BusIO
     path: .
     version: 1.17.4
+  lovyan03/LovyanGFX:
+    git: https://github.com/lovyan03/LovyanGFX
+    path: .
+    version: master
