@@ -40,6 +40,7 @@ idf_component_register(
         arduino-esp32
         SdFat
         esp_lcd_st7703
+        BusIO
 )
 
 target_compile_options(${COMPONENT_LIB} PRIVATE
@@ -79,4 +80,5 @@ target_compile_options(${COMPONENT_LIB} PRIVATE
       "-DARDUINO_RUNNING_CORE=1"
       "-DARDUINO_EVENT_RUNNING_CORE=1"
       "-DLV_LVGL_H_INCLUDE_SIMPLE"
+      "-DUSE_ESP_LCD_WHY2025"
 )
