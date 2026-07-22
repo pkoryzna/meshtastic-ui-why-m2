@@ -1,5 +1,7 @@
 # Meshtastic UI standalone for WHY2025 badge
 
+**do you know CMake and C++? help updating this project https://github.com/pkoryzna/meshtastic-ui-why-m2/issues/9**
+
 Meshtastic Firmware+UI port for the WHY2025 badge.
 
 ![meshtastic ui showing up looking okay](doc/ui_workin.jpeg)
